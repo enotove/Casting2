@@ -16,10 +16,21 @@ public:
 		denominator_ = denominator;
 	}
 	std::string Print() {
-		std::stringstream ss;
-		ss << numerator_ << '/' << denominator_;
+		if (numerator_ == denominator_) return "1";
+		else if (denominator_ % numerator_ == 0)
+		{
+			std::stringstream ss;
+			ss << numerator_/numerator_ << '/' << denominator_ / numerator_;
 
-		return ss.str();
+			return ss.str();
+		}
+		else {
+			std::stringstream ss;
+			ss << numerator_ << '/' << denominator_;
+
+			return ss.str();
+		}
+		
 	}
 	Fraction operator + (const Fraction& other) {
 		if (denominator_ != other.denominator_)
@@ -48,23 +59,18 @@ public:
 	{
 		if (denominator_ != other.denominator_)
 		{
-			int temp_numerator1 = numerator_ * other.denominator_;
-			int temp_numerator2 = denominator_ * other.numerator_;
-			int temp_denominator = denominator_ * other.denominator_;
-			return Fraction(temp_numerator1 * temp_numerator2, temp_denominator);
+			
+			return Fraction(numerator_ * other.numerator_, denominator_ * other.denominator_);
 		}
 		else return Fraction(numerator_ * other.numerator_, denominator_);
 	}
 	Fraction operator / (const Fraction& other)
 	{
-		if (denominator_ != other.denominator_)
-		{
-			int temp_numerator1 = numerator_ * other.denominator_;
-			int temp_numerator2 = denominator_ * other.numerator_;
-			int temp_denominator = denominator_ * other.denominator_;
-			return Fraction(temp_numerator1 / temp_numerator2, temp_denominator);
-		}
-		else return Fraction(numerator_ / other.numerator_, denominator_);
+	
+			int temp_numerator = numerator_ * other.denominator_;
+			int temp_denominator = denominator_ * other.numerator_;
+			return Fraction(temp_numerator, temp_denominator);
+	
 	}
 	
 	Fraction operator - () 
