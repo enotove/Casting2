@@ -1,7 +1,10 @@
 
 #include <iostream>
 #include <string>
-#include <sstream>
+#include <format>
+#include <numeric>
+
+
 class Fraction
 {
 private:
@@ -17,18 +20,11 @@ public:
 	}
 	std::string Print() {
 		if (numerator_ == denominator_) return "1";
-		else if (denominator_ % numerator_ == 0)
+		else
 		{
-			std::stringstream ss;
-			ss << numerator_/numerator_ << '/' << denominator_ / numerator_;
+			auto gcd = std::gcd(numerator_, denominator_);
 
-			return ss.str();
-		}
-		else {
-			std::stringstream ss;
-			ss << numerator_ << '/' << denominator_;
-
-			return ss.str();
+			return std::format("{}/{}", numerator_/gcd, denominator_/gcd);
 		}
 		
 	}
