@@ -53,12 +53,9 @@ public:
 	}
 	Fraction operator * (const Fraction &other)
 	{
-		if (denominator_ != other.denominator_)
-		{
-			
+		
 			return Fraction(numerator_ * other.numerator_, denominator_ * other.denominator_);
-		}
-		else return Fraction(numerator_ * other.numerator_, denominator_);
+		
 	}
 	Fraction operator / (const Fraction& other)
 	{
@@ -76,13 +73,13 @@ public:
 	}
 	Fraction& operator -- ()
 	{
-	    numerator_-= 1;
+	    numerator_-= denominator_;
 		return *this;
 	}
 	Fraction& operator ++ ()
 	{
 		
-		numerator_+= 1;
+		numerator_+= denominator_;
 		return *this;
 	}
 	Fraction operator -- (int)
@@ -120,6 +117,7 @@ int main()
 		std::cout << f1.Print() << " - " << f2.Print() << " = " << (f1-f2).Print()<< '\n';
 		std::cout << f1.Print() << " * " << f2.Print() << " = " << (f1 * f2).Print() << '\n';
 		std::cout << f1.Print() << " / " << f2.Print() << " = " << (f1 / f2).Print() << '\n';
+		std::cout << " ++"  << f1.Print() << " * " << f2.Print() << " = " << (++f1 * f2).Print() << '\n';
 		std::cout << "-" << f2.Print() << " = " << (-f2).Print() << '\n';
 		std::cout << "-" << f1.Print() << " = " << (-f1).Print() << '\n';
 		std::cout << "++" << f1.Print() << " = " << (f1++).Print() << '\n';
